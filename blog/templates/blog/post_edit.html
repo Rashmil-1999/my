@@ -1,9 +1,14 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-        <h1>New Post</h1>
+      {% if post.created_date %}
+            <h1>Edit Post</h1>
+      {% else %}
+            <h1>New Post</h1>
+      {% endif %}
         <form method="POST" class="post-form">{% csrf_token %}
                 {{ form.as_p}}
-                <button type="submit" class="save btn btn-default">Save</button>
+                <button type="submit" class="save btn btn-default">Save As Draft</button>
+                <button type="submit" class="publish btn btn-default" href="{% url 'post_publish_new'  %}">Publish</button>
         </form>
-{% endblock %}                
+{% endblock %}
